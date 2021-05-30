@@ -39,14 +39,23 @@
 
         (function() {
 
+            /**
+             * App State.
+             */
             var state = {
                 user_name: null,
             };
 
+            /**
+             * App Events.
+             */
             var events = {
                 SET_USER_NAME: 'set_user_name',
             };
 
+            /**
+             * App Actions.
+             */
             var actions = {
                 set_user_name: (name) => {
                     state.user_name = name;
@@ -56,6 +65,9 @@
                 },
             };
 
+            /**
+             * App Core.
+             */
             var app = {
                 ws: null,
 
@@ -64,16 +76,25 @@
                     port: 9501,
                 },
 
+                /**
+                 *
+                 */
                 init: () => {
                     app.listenEvents();
                     app.connectToServer();
                 },
 
+                /**
+                 *
+                 */
                 listenEvents: () => {
                     document.getElementById('message-form').addEventListener('submit', app.handleFormSubmit, false);
                     document.addEventListener(events.SET_USER_NAME, app.setUserName, false)
                 },
 
+                /**
+                 *
+                 */
                 connectToServer: () => {
                     let name = prompt('Who are you?', randomNameGenerator(num));
                     actions.set_user_name(name);

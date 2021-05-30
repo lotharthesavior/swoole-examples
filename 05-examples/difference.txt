@@ -1,0 +1,142 @@
+diff --git a/example1/index.html b/example2/index.html
+index 58948ca..4748ff7 100644
+--- a/example1/index.html
++++ b/example2/index.html
+@@ -7,7 +7,8 @@
+ 
+     <div class="container">
+ 
+-        <h1>WebSocket Client</h1>
++        <h1>WebSocket Client <span id="user_name"></span></h1>
++
+         <form id="message-form">
+             <div>
+                 <textarea id="message-box"></textarea>
+@@ -16,15 +17,57 @@
+                 <input type="submit" />
+             </div>
+         </form>
++
+         <hr/>
++
+         <ul id="output"></ul>
+ 
+     </div>
+ 
+     <script type="text/javascript">
+ 
++        // string generator.
++        const num = 8;
++        const randomNameGenerator = num => {
++            let res = '';
++            for(let i = 0; i < num; i++){
++                const random = Math.floor(Math.random() * 27);
++                res += String.fromCharCode(97 + random);
++            };
++            return res;
++        };
++
+         (function() {
+ 
++            /**
++             * App State.
++             */
++            var state = {
++                user_name: null,
++            };
++
++            /**
++             * App Events.
++             */
++            var events = {
++                SET_USER_NAME: 'set_user_name',
++            };
++
++            /**
++             * App Actions.
++             */
++            var actions = {
++                set_user_name: (name) => {
++                    state.user_name = name;
++                    document.dispatchEvent(new CustomEvent(events.SET_USER_NAME, {
++                        detail: {user_name: name},
++                    }));
++                },
++            };
++
++            /**
++             * App Core.
++             */
+             var app = {
+                 ws: null,
+ 
+@@ -33,17 +76,43 @@
+                     port: 9501,
+                 },
+ 
++                /**
++                 *
++                 */
+                 init: () => {
+-                    app.connectToServer();
+                     app.listenEvents();
++                    app.connectToServer();
+                 },
+ 
++                /**
++                 *
++                 */
+                 listenEvents: () => {
+-                    document.getElementById('message-form').addEventListener("submit", app.handleFormSubmit, false);
++                    document.getElementById('message-form').addEventListener('submit', app.handleFormSubmit, false);
++                    document.addEventListener(events.SET_USER_NAME, app.setUserName, false)
+                 },
+ 
++                /**
++                 *
++                 */
+                 connectToServer: () => {
+-                    var wsServer = app.config.uri + ':' + app.config.port;
++                    let name = prompt('Who are you?', randomNameGenerator(num));
++                    actions.set_user_name(name);
++
++                    if (app.ws !== null) {
++                        if (!confirm('There is an active connection, do you wish to close it?')) {
++                            return;
++                        } else {
++                            app.ws.close();
++                            app.ws = null;
++                        }
++                    }
++
++                    var wsServer = app.config.uri
++                        + ':'
++                        + app.config.port
++                        + '/?name='
++                        + state.user_name;
+                     app.ws = new WebSocket(wsServer);
+ 
+                     app.ws.onopen = function (evt) {
+@@ -52,6 +121,8 @@
+ 
+                     app.ws.onclose = function (evt) {
+                         console.log("Disconnected");
++                        app.ws = null;
++                        console.log(evt.reason);
+                     };
+ 
+                     app.ws.onmessage = function (evt) {
+@@ -80,6 +151,13 @@
+                     input.innerText = data;
+                     document.getElementById('output').appendChild(input);
+                 },
++
++                /**
++                 * @param {Event} event
++                 */
++                setUserName: (event) => {
++                    document.getElementById('user_name').innerText = '- ' + event.detail.user_name;
++                },
+             };
+ 
+             app.init();

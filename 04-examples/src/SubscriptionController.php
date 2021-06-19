@@ -15,10 +15,18 @@ class SubscriptionController
         echo "Incoming connection time: " . date('Y-m-d H:i:s') . "\n";
         echo "Incoming connection uri: " . $serverParams['REQUEST_URI'] ?? '' . "\n";
 
-        $templates = new Engine(__DIR__ . '/../html');
-        $html_content = $templates->render('sample5', [
+        $queryParams = $request->getQueryParams();
+
+        $data = [
             'main_heading' => 'Subscription Page',
-        ]);
+        ];
+
+        if (isset($queryParams['error']) && !empty($queryParams['error'])) {
+            $data['error'] = $queryParams['error'];
+        }
+
+        $templates = new Engine(__DIR__ . '/../html');
+        $html_content = $templates->render('sample5', $data);
 
         $response->getBody()->write($html_content);
         return $response->withStatus(200);

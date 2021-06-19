@@ -4,6 +4,8 @@
  * This examples has:
  * - Plates Template Engine.
  * - Dotenv for .env configurations.
+ * - Slim\App for Http Handler.
+ * - Ilex\SwoolePsr7 as PSR-7 adaptor.
  */
 
 require __DIR__ . '/vendor/autoload.php';

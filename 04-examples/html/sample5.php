@@ -11,8 +11,12 @@
             <div>
                 <p>If you want to subscribe, add your email here:</p>
                 <input name="email" id="email" value="" placeholder="johngalt@example.com"/>
-                <input type="button" value="Subscribe"/>
+                <input type="submit" value="Subscribe"/>
             </div>
+
+            <?php if (isset($error)) { ?>
+                <div style="color: red"><?php echo $error; ?></div>
+            <?php } ?>
         </form>
     </div>
 </body>

@@ -1,5 +1,7 @@
 # Chapter 04 Examples
 
+> The most complex example is the example 6, and the xample 7 has the extra information of how to listen to extra ports.
+
 The examples at this package are for the Chapter 4 of this book. In order to run it you just need to do the following steps:
 
 - Step 1: make sure you have composer available in your environment (you can go to these [instructions](https://getcomposer.org/doc/00-intro.md) if not).

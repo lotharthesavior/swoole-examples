@@ -1,11 +1,18 @@
 <?php
 
+use Conveyor\SocketHandlers\Interfaces\SocketHandlerInterface;
 use Swoole\Websocket\Server;
 use Swoole\Http\Request;
 use Swoole\WebSocket\Frame;
 
+require __DIR__ . '/vendor/autoload.php';
+
+/** @var SocketHandlerInterface $socket_router */
+$socket_router = (require_once __DIR__ . '/src/socket-router.php')();
+
 $server = new Server("0.0.0.0", 9501);
-$server->table = (require __DIR__ . DIRECTORY_SEPARATOR . 'user-table.php')();
+$server->user_table = (require __DIR__ . DIRECTORY_SEPARATOR . 'user-table.php')();
+$server->message_table = (require __DIR__ . DIRECTORY_SEPARATOR . 'message-table.php')();
 
 $server->on("start", function (Server $server) {
     echo 'Swoole WebSocket Server is started at http://127.0.0.1:9501' . PHP_EOL;
@@ -18,24 +25,17 @@ $server->on('open', function(Server $server, Request $request) {
     }
 
     parse_str($request->server['query_string'], $parsed_query);
-    $server->table->set($request->fd, ['id' => $request->fd, 'name' => $parsed_query['name']]);
+    $server->user_table->set($request->fd, ['id' => $request->fd, 'name' => $parsed_query['name']]);
 
     echo 'Connection open: ' . $request->fd . PHP_EOL;
 });
 
-$server->on('message', function(Server $server, Frame $frame) {
-    $user_name = $server->table->get($frame->fd, 'name');
+$server->on('message', function(Server $server, Frame $frame) use ($socket_router) {
+    $user_name = $server->user_table->get($frame->fd, 'name');
 
     echo 'Received message (' . $user_name . '): ' . $frame->data . PHP_EOL;
 
-    $connections = $server->connection_list(0);
-    foreach ($connections as $fd) {
-        if ($frame->fd === $fd) {
-            $server->push($fd, 'My message: ' . $frame->data);
-        } else {
-            $server->push($fd, $user_name . '\'s message: ' . $frame->data);
-        }
-    }
+    $socket_router->handle($frame->data, $frame->fd, $server);
 });
 
 $server->on('close', function(Server $server, $fd) {

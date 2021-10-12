@@ -1,0 +1,6 @@
+{
+    "name": "lotharthsavior/dojo-sockets",
+    "require": {
+        "league/plates": "^3.4"
+    }
+}

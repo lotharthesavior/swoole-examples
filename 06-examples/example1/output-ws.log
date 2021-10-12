@@ -1,0 +1,53 @@
+Swoole WebSocket Server is started at http://127.0.0.1:8181
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+[2021-09-27 05:49:33 @14.0]	WARNING	ListenPort::listen(): listen(0.0.0.0:8181, 512) failed, Error: Address already in use[98]
+
+Fatal error: Swoole\Server::start(): failed to start server. Error: ListenPort::listen(): listen(0.0.0.0:8181, 512) failed, Error: Address already in use[98] in /app/ws.php on line 65
+[2021-09-27 05:49:33 @14.0]	ERROR	php_swoole_server_rshutdown() (ERRNO 503): Fatal error: Swoole\Server::start(): failed to start server. Error: ListenPort::listen(): listen(0.0.0.0:8181, 512) failed, Error: Address already in use[98] in /app/ws.php on line 65
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11
+
+Fatal error: Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:8181], Error: Address already in use[98] in /app/ws.php:11
+Stack trace:
+#0 /app/ws.php(11): Swoole\Server->__construct('0.0.0.0', 8181)
+#1 {main}
+  thrown in /app/ws.php on line 11

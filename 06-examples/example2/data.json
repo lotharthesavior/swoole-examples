@@ -1,0 +1,14 @@
+[
+	{
+		"name": "John Galt",
+		"email": "john@galt.com"
+	},
+	{
+		"name": "Luke Skywalker",
+		"email": "luke@skywalker.com"
+	},
+	{
+		"name": "Luke Skywalker 2",
+		"email": "luke@skywalker2.com"
+	}
+]

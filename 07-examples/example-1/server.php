@@ -18,7 +18,6 @@ $server->set([
 ]);
 $server->on('start', function (Server $server) use ($port) {
     echo 'Swoole http server is started at http://127.0.0.1:' . $port . PHP_EOL;
-    // echo $server->getMasterPid() . PHP_EOL;
 });
 $server->on('shutdown', function($server) {
 	echo 'Swoole http server is shutting down.' . PHP_EOL;

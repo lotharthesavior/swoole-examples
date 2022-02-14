@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de9f0d426f9cb9f2f52743a442827c7c",
+    "content-hash": "d4e58a3a56213f06064180b6cf1b9112",
     "packages": [
+        {
+            "name": "kanata-php/socket-conveyor",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kanata-php/socket-conveyor.git",
+                "reference": "ef594323b75ec8515073102b9dc92989d24a05fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kanata-php/socket-conveyor/zipball/ef594323b75ec8515073102b9dc92989d24a05fe",
+                "reference": "ef594323b75ec8515073102b9dc92989d24a05fe",
+                "shasum": ""
+            },
+            "require": {
+                "league/pipeline": "^1.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "codedungeon/phpunit-result-printer": "^0.30.0",
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^9.2",
+                "symfony/var-dumper": "^5.1"
+            },
+            "bin": [
+                "start-ws-server"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tests\\": "tests",
+                    "Conveyor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A WebSocket/Socket message Router",
+            "support": {
+                "issues": "https://github.com/kanata-php/socket-conveyor/issues",
+                "source": "https://github.com/kanata-php/socket-conveyor/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kanata-php",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-13T21:13:55+00:00"
+        },
         {
             "name": "league/pipeline",
             "version": "1.0.0",
@@ -62,53 +113,6 @@
                 "source": "https://github.com/thephpleague/pipeline/tree/master"
             },
             "time": "2018-06-05T21:06:51+00:00"
-        },
-        {
-            "name": "wordstree/socket-conveyor",
-            "version": "0.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WordsTree/socket-conveyor.git",
-                "reference": "0252a6f7edb4f4129636da55b4b5cf4b696ddf22"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordsTree/socket-conveyor/zipball/0252a6f7edb4f4129636da55b4b5cf4b696ddf22",
-                "reference": "0252a6f7edb4f4129636da55b4b5cf4b696ddf22",
-                "shasum": ""
-            },
-            "require": {
-                "league/pipeline": "^1.0"
-            },
-            "require-dev": {
-                "codedungeon/phpunit-result-printer": "^0.30.0",
-                "mockery/mockery": "^1.4",
-                "phpunit/phpunit": "^9.2",
-                "symfony/var-dumper": "^5.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Conveyor\\": "src/",
-                    "Tests\\": "tests"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Savio Resende",
-                    "email": "savio@savioresende.com.br"
-                }
-            ],
-            "description": "A WebSocket/Socket message Router",
-            "support": {
-                "issues": "https://github.com/WordsTree/socket-conveyor/issues",
-                "source": "https://github.com/WordsTree/socket-conveyor/tree/0.2.4"
-            },
-            "time": "2021-02-28T20:57:44+00:00"
         }
     ],
     "packages-dev": [],
@@ -119,5 +123,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

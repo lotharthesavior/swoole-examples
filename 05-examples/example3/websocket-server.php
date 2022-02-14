@@ -7,9 +7,6 @@ use Swoole\WebSocket\Frame;
 
 require __DIR__ . '/vendor/autoload.php';
 
-/** @var SocketHandlerInterface $socket_router */
-$socket_router = (require_once __DIR__ . '/src/socket-router.php')();
-
 $server = new Server("0.0.0.0", 9501);
 $server->user_table = (require __DIR__ . DIRECTORY_SEPARATOR . 'user-table.php')();
 $server->message_table = (require __DIR__ . DIRECTORY_SEPARATOR . 'message-table.php')();
@@ -30,11 +27,13 @@ $server->on('open', function(Server $server, Request $request) {
     echo 'Connection open: ' . $request->fd . PHP_EOL;
 });
 
-$server->on('message', function(Server $server, Frame $frame) use ($socket_router) {
+$server->on('message', function(Server $server, Frame $frame) {
     $user_name = $server->user_table->get($frame->fd, 'name');
 
     echo 'Received message (' . $user_name . '): ' . $frame->data . PHP_EOL;
 
+    /** @var SocketHandlerInterface $socket_router */
+    $socket_router = (require_once __DIR__ . '/src/socket-router.php')();
     $socket_router->handle($frame->data, $frame->fd, $server);
 });
 

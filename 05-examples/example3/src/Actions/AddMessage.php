@@ -2,20 +2,13 @@
 
 namespace App\Actions;
 
-use Conveyor\Actions\Interfaces\ActionInterface;
+use Conveyor\Actions\Abstractions\AbstractAction;
 
-class AddMessage implements ActionInterface
+class AddMessage extends AbstractAction
 {
-    /** @var string */
-    protected $name = 'add-message';
+    protected string $name = 'add-message';
 
-    /** @var int */
-    protected $fd;
-
-    /** @var mixed */
-    protected $server;
-
-    public function execute(array $data)
+    public function execute(array $data): mixed
     {
         $user_name = $this->server->user_table->get($this->fd, 'name');
 
@@ -46,18 +39,8 @@ class AddMessage implements ActionInterface
         }
     }
 
-    public function getName() : string
+    public function validateData(array $data): void
     {
-        return $this->name;
-    }
-
-    public function setFd(int $fd): void
-    {
-        $this->fd = $fd;
-    }
-
-    public function setServer($server): void
-    {
-        $this->server = $server;
+        // TODO: Implement validateData() method.
     }
 }

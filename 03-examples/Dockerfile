@@ -1,4 +1,4 @@
-FROM php:7.4.2-cli
+FROM php:8.0-cli
 
 ARG ENVIRONMENT_NAME
 
@@ -14,12 +14,13 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install vim -y && \
     apt-get install curl -y && \
     apt-get install -y supervisor && \
+    apt-get install -y inotify-tools && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # install swoole
 RUN cd /tmp && git clone https://github.com/swoole/swoole-src.git && \
     cd swoole-src && \
-    git checkout v4.5.5 && \
+    git checkout v4.8.2 && \
     phpize  && \
     ./configure  --enable-openssl --enable-http2 && \
     make && make install

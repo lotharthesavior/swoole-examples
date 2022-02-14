@@ -118,7 +118,7 @@ $monitor_process->start();
 
 // communication websocket => actions
 $actions_communication = new Process(function() use (
-    $ws_process, $actions_table, $ws_table_key
+    $actions_table, $ws_table_key
 ) {
     Timer::tick(1000, function() use ($actions_table, $ws_table_key) {
         $action = $actions_table->get($ws_table_key);
@@ -145,5 +145,5 @@ $actions_communication->start();
 
 // listening for the kill signals
 Co\run(function() {
-    $info = System::waitSignal(SIGKILL, -1);
+    System::waitSignal(SIGKILL, -1);
 });

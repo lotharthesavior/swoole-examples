@@ -1,6 +1,6 @@
 {
     "require": {
-        "wordstree/socket-conveyor": "^0.2.4"
+        "kanata-php/socket-conveyor": "^1.1"
     },
     "autoload": {
         "psr-4": {

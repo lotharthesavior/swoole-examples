@@ -1,0 +1,5 @@
+.phpintel
+http-server-log
+htt-server-pid
+supervisord.log
+

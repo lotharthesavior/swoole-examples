@@ -9,11 +9,10 @@ if (!defined('PID_FILE')) {
 }
 
 if (file_exists(PID_FILE)) {
-    echo "Server already running at the pid: " . file_get_contents(PID_FILE) . "\n";
-    exit;
+    unlink(PID_FILE);
 }
 
-$server = new Server("0.0.0.0", 9503, SWOOLE_PROCESS);
+$server = new Server("0.0.0.0", 8001, SWOOLE_PROCESS);
 
 $server->on("start", function (Server $server) {
     file_put_contents(PID_FILE, $server->master_pid);

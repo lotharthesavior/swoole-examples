@@ -1,8 +1,10 @@
-FROM php:8.0-cli
+FROM php:8.1-cli
 
 ARG ENVIRONMENT_NAME
 
 COPY ./rootfilesystem/ /
+
+RUN docker-php-ext-install sockets
 
 RUN apt-get update && apt-get install vim -y && \
     apt-get install openssl -y && \
@@ -18,15 +20,14 @@ RUN apt-get update && apt-get install vim -y && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # install swoole
-RUN cd /tmp && git clone https://github.com/swoole/swoole-src.git && \
+RUN cd /tmp && git clone https://github.com/openswoole/swoole-src.git && \
     cd swoole-src && \
-    git checkout v4.8.2 && \
+    git checkout v4.11.1 && \
     phpize  && \
-    ./configure  --enable-openssl --enable-http2 && \
+    ./configure --enable-openssl --enable-http2 --enable-sockets --enable-mysqlnd --enable-swoole-json && \
     make && make install
-
-RUN touch /usr/local/etc/php/conf.d/swoole.ini && \
-    echo 'extension=swoole.so' > /usr/local/etc/php/conf.d/swoole.ini
+RUN touch /usr/local/etc/php/conf.d/openswoole.ini && \
+    echo 'extension=openswoole.so' > /usr/local/etc/php/conf.d/openswoole.ini
 
 # Here goes your git configurations
 # RUN git config --global user.email "" \

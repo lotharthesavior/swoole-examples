@@ -1,5 +1,5 @@
 .phpintel
 http-server-log
-htt-server-pid
+http-server-pid
 supervisord.log
 

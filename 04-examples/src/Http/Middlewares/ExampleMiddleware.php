@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Http\Middlewares;
 
+use Exception;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Exception;
+use Slim\Psr7\Response;
 
 class ExampleMiddleware
 {

@@ -10,24 +10,24 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\ExampleMiddleware;
-use App\IndexController;
-use App\SubscriptionController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Middlewares\ExampleMiddleware;
 use Dotenv\Dotenv;
 use Ilex\SwoolePsr7\SwooleResponseConverter;
 use Ilex\SwoolePsr7\SwooleServerRequestConverter;
-use Slim\App;
 use Nyholm\Psr7\Factory\Psr17Factory;
-use Swoole\HTTP\Server;
+use Slim\App;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
+use Swoole\HTTP\Server;
 
 // Load config.
 
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Start Psr7 Converter.
+// Section: Start Psr7 Converter.
 
 $psr17Factory = new Psr17Factory();
 $requestConverter = new SwooleServerRequestConverter(
@@ -37,7 +37,7 @@ $requestConverter = new SwooleServerRequestConverter(
     $psr17Factory
 );
 
-// Start Request Handler (Slim).
+// Section: Start Request Handler (Slim).
 
 $app = new App($psr17Factory);
 $app->get('/', [IndexController::class, 'index']);

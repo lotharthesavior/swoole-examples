@@ -2,7 +2,7 @@
     "require": {
         "league/plates": "^3.4",
         "vlucas/phpdotenv": "^5.3",
-        "ilexn/swoole-convent-psr7": "^0.2.0",
+        "ilexn/swoole-convert-psr7": "^0.6.0",
         "slim/slim": "^4.0",
         "nyholm/psr7": "^1.4",
         "slim/psr7": "^1.4"

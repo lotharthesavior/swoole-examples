@@ -5,7 +5,12 @@
         "ilexn/swoole-convert-psr7": "^0.6.0",
         "slim/slim": "^4.0",
         "nyholm/psr7": "^1.4",
-        "slim/psr7": "^1.4"
+        "slim/psr7": "^1.4",
+        "lotharthesavior/chocookies": "^0.0.3",
+        "ramsey/uuid": "^4.3",
+        "psr/simple-cache": "^3.0",
+        "ext-json": "*",
+        "php": "^8"
     },
     "autoload": {
         "psr-4": {

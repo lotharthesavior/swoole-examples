@@ -8,7 +8,7 @@ use League\Plates\Engine;
 
 class IndexController
 {
-    public function index (ServerRequestInterface $request, ResponseInterface $response)
+    public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
         $serverParams = $request->getServerParams();
         
@@ -17,7 +17,7 @@ class IndexController
 
         $query = $request->getQueryParams();
 
-        $templates = new Engine(__DIR__ . '/../html');
+        $templates = new Engine(ROOT_DIR . '/html');
         $html_content = $templates->render('sample4', [
             'main_heading' => 'My Page Title',
             'content' => 'The page\'s Body goes here... ' . ($query['content'] ?? ''),

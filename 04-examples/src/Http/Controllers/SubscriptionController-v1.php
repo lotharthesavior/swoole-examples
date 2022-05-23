@@ -15,7 +15,7 @@ class SubscriptionController
         echo "Incoming connection time: " . date('Y-m-d H:i:s') . "\n";
         echo "Incoming connection uri: " . $serverParams['REQUEST_URI'] ?? '' . "\n";
 
-        $templates = new Engine(__DIR__ . '/../html');
+        $templates = new Engine(ROOT_DIR . '/html');
         $html_content = $templates->render('sample5', [
             'main_heading' => 'Subscription Page',
         ]);
@@ -34,7 +34,7 @@ class SubscriptionController
         echo "Incoming connection uri: " . $serverParams['REQUEST_URI'] ?? '' . "\n";
         echo "Incoming connection data: " . json_encode($data) . "\n";
 
-        $templates = new Engine(__DIR__ . '/../html');
+        $templates = new Engine(ROOT_DIR . '/html');
         $html_content = $templates->render('sample5-result', [
             'main_heading' => 'Subscription Page Result',
             'email' => $data['email'],

@@ -12,16 +12,18 @@ const ROOT_DIR = __DIR__;
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\LoginController;
+use App\Http\Middlewares\AuthorizationMiddleware;
+use App\Http\Middlewares\SessionMiddleware;
 use Dotenv\Dotenv;
 use Ilex\SwoolePsr7\SwooleResponseConverter;
 use Ilex\SwoolePsr7\SwooleServerRequestConverter;
-use Slim\App;
 use Nyholm\Psr7\Factory\Psr17Factory;
-use Swoole\HTTP\Server;
+use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
+use Swoole\HTTP\Server;
 
 // Load config.
 
@@ -41,9 +43,18 @@ $requestConverter = new SwooleServerRequestConverter(
 // Section: Start Request Handler (Slim).
 
 $app = new App($psr17Factory);
-$app->get('/', [IndexController::class, 'index']);
-$app->get('/subscription', [SubscriptionController::class, 'subscriptionForm']);
-$app->post('/subscription', [SubscriptionController::class, 'subscribe']);
+$app->group('', function (RouteCollectorProxy $group) {
+    $group->get('/', [LoginController::class, 'home']);
+
+    $group->group('', function (RouteCollectorProxy $group2) {
+        $group2->get('/login', [LoginController::class, 'login'])->setName('login');
+        $group2->post('/login', [LoginController::class, 'loginHandler'])->setName('login-handler');
+        $group2->post('/logout', LoginController::class . ':logoutHandler')->setName('logout-handler');
+        $group2->get('/admin', [LoginController::class, 'admin'])
+            ->setName('admin');
+    })->add(new AuthorizationMiddleware);
+
+})->add(new SessionMiddleware);
 $app->addRoutingMiddleware();
 
 // Swoole part.
@@ -56,7 +67,7 @@ $server = new Server($server_address, $server_port);
 $server->set([
     'document_root' => __DIR__ . '/public',
     'enable_static_handler' => true,
-    'static_handler_locations' => ['/imgs'],
+    'static_handler_locations' => ['/imgs', '/css'],
 ]);
 
 $server->on("start", function (Server $server) use ($server_address, $server_port) {

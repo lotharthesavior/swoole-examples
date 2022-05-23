@@ -25,7 +25,7 @@ class SubscriptionController
             $data['error'] = $queryParams['error'];
         }
 
-        $templates = new Engine(__DIR__ . '/../html');
+        $templates = new Engine(ROOT_DIR . '/html');
         $html_content = $templates->render('sample5', $data);
 
         $response->getBody()->write($html_content);
@@ -42,7 +42,7 @@ class SubscriptionController
         echo "Incoming connection uri: " . $serverParams['REQUEST_URI'] ?? '' . "\n";
         echo "Incoming connection data: " . json_encode($data) . "\n";
 
-        $templates = new Engine(__DIR__ . '/../html');
+        $templates = new Engine(ROOT_DIR . '/html');
         $html_content = $templates->render('sample5-result', [
             'main_heading' => 'Subscription Page Result',
             'email' => $data['email'],

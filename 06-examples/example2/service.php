@@ -33,7 +33,7 @@ Co\run(function() use ($chan) {
 				echo 'User:' . $user['name'] . "\n";
 			}
 
-			co::sleep(1.0);
+			Co::sleep(1.0);
 		}
 	});
 

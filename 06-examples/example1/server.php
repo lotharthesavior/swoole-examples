@@ -18,7 +18,7 @@ $server->on("start", function($server) {
 $server->on('request', function(Request $request, Response $response) {
 	$response->header('Content-Type', 'application/json');
 
-	co::sleep(1);
+	Co::sleep(1);
 	echo "executing...";
 
 	if (isset($request->get['user'])) {
@@ -32,7 +32,6 @@ $server->on('request', function(Request $request, Response $response) {
 				"content" => "some content 2",
 			],
 		]));
-		return;
 	} else {
 		$response->end(json_encode([
 			1 => [
@@ -48,13 +47,7 @@ $server->on('request', function(Request $request, Response $response) {
 				"email" => "luke@skywalker2.com",
 			],
 		]));
-		return;
 	}
-
-	$response->end(json_encode([
-		'error' => 1,
-		'message' => 'It shouldn\'t be here',
-	]));
 });
 
 $server->start();

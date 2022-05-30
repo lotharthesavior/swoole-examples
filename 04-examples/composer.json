@@ -10,7 +10,8 @@
         "ramsey/uuid": "^4.3",
         "psr/simple-cache": "^3.0",
         "ext-json": "*",
-        "php": "^8"
+        "php": "^8",
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {

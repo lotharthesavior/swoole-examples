@@ -22,6 +22,14 @@ $server->on('open', function(Server $server, Request $request) {
         return;
     }
 
+    $acceptable_origins = ['http://127.0.0.1:8080', 'http://localhost:8080'];
+
+    if (!in_array($request->header['origin'], $acceptable_origins)) {
+        echo 'Closed due origin!' . PHP_EOL;
+        $server->disconnect($request->fd, 401, 'Not authorized procedure!');
+        return;
+    }
+
     parse_str($request->server['query_string'], $parsed_query);
     $server->user_table->set($request->fd, [
         'id' => $request->fd,

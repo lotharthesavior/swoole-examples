@@ -1,6 +1,5 @@
 <?php
 
-// use Exception;
 use Swoole\Coroutine;
 use Swoole\Coroutine\Channel;
 
